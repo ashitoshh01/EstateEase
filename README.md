@@ -15,4 +15,6 @@ A modern and responsive real estate website built to showcase property listings,
 <ul>
   <li>TypeScript</li>
   <li>Tailwind CSS</li>
+  <li>JavaScipt</li>
+  <li>CSS</li>
 </ul>
