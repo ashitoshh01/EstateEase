@@ -13,6 +13,7 @@ A modern and responsive real estate website built to showcase property listings,
 🛠️ Tech Stack
 
 <ul>
+  <li>NextJS</li>
   <li>TypeScript</li>
   <li>Tailwind CSS</li>
   <li>JavaScipt</li>
