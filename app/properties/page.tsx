@@ -1,6 +1,6 @@
 import { SearchProvider } from "@/components/search-context"
 import AllProperties from "@/components/all-properties"
-import SearchBar from "@/components/search-bar"
+import SearchProperties from "@/app/search-properties"
 
 export const metadata = {
   title: "All Properties - EstateEase",
@@ -20,7 +20,7 @@ export default function PropertiesPage() {
           </div>
 
           <SearchProvider>
-            <SearchBar />
+            <SearchProperties />
             <div className="mt-12">
               <AllProperties />
             </div>

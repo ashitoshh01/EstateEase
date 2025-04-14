@@ -6,20 +6,15 @@ import { ChevronLeft, ChevronRight, Expand } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import type { Property } from "@/data/properties"
-import Img3 from "../image/img3.jpg"
-import Img4 from "../image/img4.jpg"
-import Img5 from "../image/img5.jpg"
-import Img6 from "../image/img6.jpg"
-
 
 export default function PropertyGallery({ property }: { property: Property }) {
   // Generate multiple images for the gallery
   const images = [
     property.image,
-    Img3,
-    Img4,
-    Img5,
-    Img6
+    "/placeholder.svg?height=600&width=800",
+    "/placeholder.svg?height=600&width=800",
+    "/placeholder.svg?height=600&width=800",
+    "/placeholder.svg?height=600&width=800",
   ]
 
   const [currentImage, setCurrentImage] = useState(0)

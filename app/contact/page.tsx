@@ -1,15 +1,53 @@
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-
-export const metadata = {
-  title: "Contact Us - EstateEase",
-  description: "Get in touch with our team for any inquiries or assistance with your real estate needs.",
-}
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { CheckCircle2 } from "lucide-react"
 
 export default function ContactPage() {
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Here you would normally send the form data to your backend
+    console.log("Form submitted:", formData)
+    setIsSubmitted(true)
+  }
+
+  const handleDialogClose = () => {
+    setIsSubmitted(false)
+    // Reset form
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    })
+  }
+
   return (
     <main className="flex min-h-screen flex-col">
       <section className="bg-muted py-16 md:py-24">
@@ -29,44 +67,76 @@ export default function ContactPage() {
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h2 className="mb-6 text-2xl font-bold">Get in Touch</h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <label htmlFor="first-name" className="text-sm font-medium">
+                    <label htmlFor="firstName" className="text-sm font-medium">
                       First Name
                     </label>
-                    <Input id="first-name" placeholder="John" required />
+                    <Input
+                      id="firstName"
+                      placeholder="John"
+                      required
+                      value={formData.firstName}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="last-name" className="text-sm font-medium">
+                    <label htmlFor="lastName" className="text-sm font-medium">
                       Last Name
                     </label>
-                    <Input id="last-name" placeholder="Doe" required />
+                    <Input id="lastName" placeholder="Doe" required value={formData.lastName} onChange={handleChange} />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">
                     Email
                   </label>
-                  <Input id="email" type="email" placeholder="john.doe@example.com" required />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="john.doe@example.com"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="phone" className="text-sm font-medium">
                     Phone
                   </label>
-                  <Input id="phone" type="tel" placeholder="(123) 456-7890" />
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="(123) 456-7890"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-sm font-medium">
                     Subject
                   </label>
-                  <Input id="subject" placeholder="How can we help you?" required />
+                  <Input
+                    id="subject"
+                    placeholder="How can we help you?"
+                    required
+                    value={formData.subject}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
                     Message
                   </label>
-                  <Textarea id="message" placeholder="Your message..." rows={5} required />
+                  <Textarea
+                    id="message"
+                    placeholder="Your message..."
+                    rows={5}
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                  />
                 </div>
                 <Button type="submit" className="w-full">
                   Send Message
@@ -150,13 +220,45 @@ export default function ContactPage() {
       <section className="bg-muted py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-6 text-2xl font-bold">Our Locations</h2>
-          <div className="aspect-[21/9] overflow-hidden rounded-lg bg-card">
-            <div className="flex h-full items-center justify-center">
-              <p className="text-muted-foreground">Map with office locations would be displayed here</p>
-            </div>
+          <div className="aspect-[21/9] overflow-hidden rounded-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.3059353029!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1649852982902!5m2!1sen!2s"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="EstateEase Office Locations"
+            ></iframe>
           </div>
         </div>
       </section>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={isSubmitted} onOpenChange={handleDialogClose}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <CheckCircle2 className="h-5 w-5 text-primary" />
+              Message Sent Successfully
+            </DialogTitle>
+            <DialogDescription>
+              Thank you for contacting us! Your query has been received and our team will get in touch with you shortly.
+            </DialogDescription>
+          </DialogHeader>
+          <Alert className="bg-primary/10 border-primary/20">
+            <AlertTitle>What happens next?</AlertTitle>
+            <AlertDescription>
+              One of our agents will review your message and contact you within 24 hours using the contact information
+              you provided.
+            </AlertDescription>
+          </Alert>
+          <Button onClick={handleDialogClose} className="w-full">
+            Close
+          </Button>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }

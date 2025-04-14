@@ -8,8 +8,6 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { allProperties } from "@/data/properties"
-import Img from "../image/img9.jpg"
-
 
 export default function SimilarProperties({
   currentPropertyId,
@@ -49,7 +47,7 @@ export default function SimilarProperties({
             <div className="relative">
               <div className="aspect-[4/3] overflow-hidden">
                 <Image
-                  src={property.image || Img}
+                  src={property.image || "/placeholder.svg"}
                   alt={property.title}
                   width={800}
                   height={600}

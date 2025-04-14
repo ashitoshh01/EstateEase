@@ -5,26 +5,23 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import Img from "../image/img.jpg"
-import Img1 from "../image/img1.jpg"
-import Img2 from "../image/img2.jpg"
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = [
     {
-      image: Img,
+      image: "/placeholder.svg?height=1080&width=1920",
       title: "Find Your Dream Home",
       description: "Discover the perfect property that fits your lifestyle and budget.",
     },
     {
-      image: Img1,
+      image: "/placeholder.svg?height=1080&width=1920",
       title: "Premium Properties",
       description: "Explore our exclusive collection of luxury homes and estates.",
     },
     {
-      image: Img2,
+      image: "/placeholder.svg?height=1080&width=1920",
       title: "Expert Guidance",
       description: "Our experienced agents will help you every step of the way.",
     },
@@ -34,7 +31,7 @@ export default function HeroSection() {
     // Auto-change slides every 2 seconds
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length)
-    }, 4000)
+    }, 2000)
 
     // Clear interval on component unmount
     return () => clearInterval(interval)

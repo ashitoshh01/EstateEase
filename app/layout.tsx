@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "EstateEase - Find Your Dream Home",
   description:
     "Your trusted partner in finding the perfect property. We make real estate simple and accessible for everyone.",
+  icons: {
+    icon: "/favicon.ico",
+  },
     generator: 'v0.dev'
 }
 
@@ -22,11 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
             <Header />
-            {children}
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </ThemeProvider>

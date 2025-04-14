@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Home, Building, Phone, Info, User } from "lucide-react"
+import { Menu, Home, Building, Phone, Info, User, FileText, Lock } from "lucide-react"
 import ThemeToggle from "@/components/theme-toggle"
 import { motion } from "framer-motion"
 
@@ -13,6 +13,7 @@ const navItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Properties", href: "/properties", icon: Building },
   { name: "About", href: "/about", icon: Info },
+  { name: "Blog", href: "/blog", icon: FileText },
   { name: "Contact", href: "/contact", icon: Phone },
 ]
 
@@ -36,7 +37,7 @@ export default function Header() {
   return (
     <motion.header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-background"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -108,6 +109,15 @@ export default function Header() {
                       </Link>
                     )
                   })}
+                  <Link
+                    href="/privacy"
+                    className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                      pathname === "/privacy" ? "text-primary" : "text-foreground/70"
+                    }`}
+                  >
+                    <Lock className="h-5 w-5" />
+                    Privacy Policy
+                  </Link>
                 </nav>
                 <Button asChild className="w-full">
                   <Link href="/login">
